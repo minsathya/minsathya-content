@@ -55,7 +55,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding: 20px 16px 100px 16px;
+            padding: calc(12px + env(safe-area-inset-top)) 16px 100px 16px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -630,7 +630,37 @@
     </main>
 
     <script>
-        // MASTER 24 FOOD DATABASE
+        // ==========================================================================
+        // 1. THEME SYNC ENGINE
+        // ==========================================================================
+        const bodyElement = document.body;
+        const systemLightQuery = window.matchMedia('(prefers-color-scheme: light)');
+
+        function syncThemeWithApp() {
+            const savedTheme = localStorage.getItem('app-theme') || localStorage.getItem('dashboard-theme') || sessionStorage.getItem('dashboard-theme');
+            
+            if (savedTheme === 'light') {
+                bodyElement.classList.add('light-mode');
+            } else if (savedTheme === 'dark') {
+                bodyElement.classList.remove('light-mode');
+            } else if (systemLightQuery.matches) {
+                bodyElement.classList.add('light-mode');
+            } else {
+                bodyElement.classList.remove('light-mode');
+            }
+
+            if (typeof recalculateTotals === 'function') recalculateTotals();
+            const activePill = document.querySelector('.day-pill.active');
+            if (activePill && typeof updateDayLine === 'function') updateDayLine(activePill, 0);
+        }
+
+        syncThemeWithApp();
+        window.addEventListener('storage', syncThemeWithApp);
+        systemLightQuery.addEventListener('change', syncThemeWithApp);
+
+        // ==========================================================================
+        // 2. MASTER 24 FOOD DATABASE
+        // ==========================================================================
         const foodMasterDB = {
             'Chickpeas': { cal: 378, pro: 20.5, fiber: 12.2, carb: 63.0, fat: 6.07, sug: 10.7, lac: 0, sfa: 0.60, unsat: 5.47, mufa: 1.36, pufa: 4.11, ala: 0.11, epa: 0, dha: 0, o6: 4.00, bCar: 40, aCar: 0, vitA: 3, vitB1: 0.48, vitB2: 0.21, vitB3: 1.54, vitB5: 1.60, vitB6: 0.54, vitB7: 10, vitB9: 557, vitB12: 0, vitC: 4.0, vitD: 0, vitE: 0.82, vitK: 9.0, ca: 105, p: 366, mg: 115, na: 24, k: 875, cl: 10, s: 180, fe: 6.2, zn: 3.4, iodine: 0, mn: 2.2, se: 8.2, cu: 850, f: 120, cr: 6, mo: 45 },
             'Paneer': { cal: 133, pro: 9.1, fiber: 0, carb: 1.6, fat: 11.50, sug: 1.6, lac: 1.2, sfa: 7.20, unsat: 4.30, mufa: 3.90, pufa: 0.40, ala: 0.05, epa: 0, dha: 0, o6: 0.35, bCar: 15, aCar: 0, vitA: 85, vitB1: 0.02, vitB2: 0.18, vitB3: 0.10, vitB5: 0.30, vitB6: 0.04, vitB7: 2, vitB9: 12, vitB12: 0.45, vitC: 0, vitD: 0.20, vitE: 0.15, vitK: 1.0, ca: 240, p: 140, mg: 18, na: 12, k: 65, cl: 30, s: 80, fe: 0.2, zn: 1.2, iodine: 8, mn: 0.02, se: 7.5, cu: 40, f: 10, cr: 1, mo: 5 },
@@ -1315,7 +1345,14 @@
             if (activePill) updateDayLine(activePill, 0);
         });
 
-        // INITIALIZE ALL 7 DAY CARDS AND DEFAULT TO SUNDAY (Day Index 0)
+        // ==========================================================================
+        // 3. SCROLL RESTORATION & DEFAULT DAY INITIALIZATION
+        // ==========================================================================
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         initDaysTrack();
         selectDay(0, true);
     </script>
