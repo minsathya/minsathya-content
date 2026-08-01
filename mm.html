@@ -1315,11 +1315,9 @@
             if (activePill) updateDayLine(activePill, 0);
         });
 
-        // AUTO-SELECT TODAY'S ACTUAL DAY OF THE WEEK (0 = Sunday, 1 = Monday, etc.)
-        const todayDayOfWeek = new Date().getDay();
-
+        // INITIALIZE ALL 7 DAY CARDS AND DEFAULT TO SUNDAY (Day Index 0)
         initDaysTrack();
-        selectDay(todayDayOfWeek, true);
+        selectDay(0, true);
     </script>
 </body>
 </html>
