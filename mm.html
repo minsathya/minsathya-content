@@ -5,36 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mm - sathya.</title>
 
-    <!-- Google Tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VGX2K64Y4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5VGX2K64Y4');
-    </script>
-
-    <script>
-      if (window.location.search.includes('tf=1') || window.location.href.includes(':~:text=')) {
-        document.documentElement.classList.add('instant-landing');
-      }
-    </script>
-
-    <meta name="description" content="Personalized daily food plan, macro tracking, and comprehensive 50-nutrient analysis dashboard.">
-    <link id="favicon" rel="icon" type="image/png" href="../favicon-light.png">
-
-    <script>
-      const favicon = document.getElementById('favicon');
-      const darkMode = window.matchMedia('(prefers-color-scheme: dark)');
-      
-      function updateFavicon(e) {
-        favicon.href = e.matches ? '../favicon-dark.png' : '../favicon-light.png';
-      }
-      
-      updateFavicon(darkMode);
-      darkMode.addEventListener('change', updateFavicon);
-    </script>
-
     <style>
         /* Modern Native App Token System */
         :root {
@@ -255,7 +225,7 @@
             z-index: 3 !important;
         }
 
-        /* WIDE CAPSULES */
+        /* WIDE CAPSULES (STABLE CORNERS FIXED) */
         .wide-capsule {
             background-color: var(--panel-bg);
             border: 1px solid var(--panel-border);
@@ -586,4 +556,862 @@
             <button class="day-pill" data-day="4">Thu</button>
             <button class="day-pill" data-day="5">Fri</button>
             <button class="day-pill" data-day="6">Sat</button>
-  
+            <div class="day-active-line" id="dayActiveLine"></div>
+        </div>
+
+        <!-- ISOLATED GRID-AREA STAGE WINDOW -->
+        <div class="day-stage-wrapper" id="dayStage">
+            <!-- 7 CARDS STACKED IN DOM WITH GRID-AREA 1/1 -->
+        </div>
+
+        <!-- CAPSULE 1: MACRONUTRIENTS & ENERGY -->
+        <div class="wide-capsule observer-capsule">
+            <div class="capsule-header-row">
+                <h2 class="capsule-title">
+                     <span class="icon-box">
+                        <img src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/macros.png?raw=true" class="capsule-icon" alt="Macro Minerals">
+                     </span>
+                     Macronutrients & energy
+                </h2>
+            </div>
+            <div class="macros-grid" id="macroGrid">
+                <div class="macro-card"><div class="macro-top-label"><span>Calories</span><span class="macro-badge" id="calBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="calVal">0 / 2200 kcal</div><div class="progress-track"><div class="progress-fill" id="calBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Protein</span><span class="macro-badge" id="proteinBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="proteinVal">0 gms / 100 gms</div><div class="progress-track"><div class="progress-fill" id="proteinBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Fiber</span><span class="macro-badge" id="fiberBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="fiberVal">0 gms / 40 gms</div><div class="progress-track"><div class="progress-fill" id="fiberBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Carbohydrates</span><span class="macro-badge" id="carbsBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="carbsVal">0 gms / 300 gms</div><div class="progress-track"><div class="progress-fill" id="carbsBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Total Fat</span><span class="macro-badge" id="fatBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="fatVal">0 gms / 78 gms</div><div class="progress-track"><div class="progress-fill" id="fatBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Sugars</span><span class="macro-badge" id="sugarsBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="sugarsVal">0 gms / < 25 gms</div><div class="progress-track"><div class="progress-fill" id="sugarsBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Sugar (Lactose)</span><span class="macro-badge" id="lactoseBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="lactoseVal">0 gms / < 25 gms</div><div class="progress-track"><div class="progress-fill" id="lactoseBar"></div></div></div>
+            </div>
+        </div>
+
+        <!-- CAPSULE 2: FATTY ACID PROFILE & LIPIDS -->
+        <div class="wide-capsule observer-capsule">
+            <div class="capsule-header-row">
+                <h2 class="capsule-title">
+                    <span class="icon-box">
+                        <img src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/fats.png?raw=true" class="capsule-icon" alt="Fats">
+                    </span>
+                    Fatty acid profile & lipids
+                </h2>
+            </div>
+            <div class="macros-grid" id="fatsGrid">
+                <div class="macro-card"><div class="macro-top-label"><span>Saturated Fat (SFA)</span><span class="macro-badge" id="sfaBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="sfaVal">0 gms / 20 gms</div><div class="progress-track"><div class="progress-fill" id="sfaBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Unsaturated Fat</span><span class="macro-badge" id="unsatBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="unsatVal">0 gms / 50 gms</div><div class="progress-track"><div class="progress-fill" id="unsatBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Monounsaturated (MUFA)</span><span class="macro-badge" id="mufaBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="mufaVal">0 gms / 30 gms</div><div class="progress-track"><div class="progress-fill" id="mufaBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Polyunsaturated (PUFA)</span><span class="macro-badge" id="pufaBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="pufaVal">0 gms / 20 gms</div><div class="progress-track"><div class="progress-fill" id="pufaBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Omega-3 (ALA)</span><span class="macro-badge" id="alaBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="alaVal">0 gms / 1.6 gms</div><div class="progress-track"><div class="progress-fill" id="alaBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Omega-3 (EPA)</span><span class="macro-badge" id="epaBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="epaVal">0 gms / 0.25 gms</div><div class="progress-track"><div class="progress-fill" id="epaBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Omega-3 (DHA)</span><span class="macro-badge" id="dhaBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="dhaVal">0 gms / 0.25 gms</div><div class="progress-track"><div class="progress-fill" id="dhaBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Omega-6</span><span class="macro-badge" id="o6Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="o6Val">0 gms / 17 gms</div><div class="progress-track"><div class="progress-fill" id="o6Bar"></div></div></div>
+            </div>
+        </div>
+
+        <!-- CAPSULE 3: CAROTENOIDS -->
+        <div class="wide-capsule observer-capsule">
+            <div class="capsule-header-row">
+                <h2 class="capsule-title">
+                    <span class="icon-box">
+                        <img src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/carotenoids.png?raw=true" class="capsule-icon" alt="Carotenoids">
+                    </span>
+                    Carotenoids
+                </h2>
+            </div>
+            <div class="macros-grid" id="carotenoidsGrid">
+                <div class="macro-card"><div class="macro-top-label"><span>Beta-Carotene</span><span class="macro-badge" id="bCaroteneBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="bCaroteneVal">0 mcg / 4800 mcg</div><div class="progress-track"><div class="progress-fill" id="bCaroteneBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Alpha-Carotene</span><span class="macro-badge" id="aCaroteneBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="aCaroteneVal">0 mcg / N/A</div><div class="progress-track"><div class="progress-fill" id="aCaroteneBar"></div></div></div>
+            </div>
+        </div>
+
+        <!-- CAPSULE 4: VITAMINS -->
+        <div class="wide-capsule observer-capsule">
+            <div class="capsule-header-row">
+                <h2 class="capsule-title">
+                    <span class="icon-box">
+                        <img src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/vitamins.png?raw=true" class="capsule-icon" alt="Vitamins">
+                    </span>
+                    Vitamins
+                </h2>
+            </div>
+            <div class="macros-grid" id="vitaminsGrid">
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin A</span><span class="macro-badge" id="vitABadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitAVal">0 mcg / 900 mcg</div><div class="progress-track"><div class="progress-fill" id="vitABar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B1 (Thiamine)</span><span class="macro-badge" id="vitB1Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB1Val">0 mg / 1.2 mg</div><div class="progress-track"><div class="progress-fill" id="vitB1Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B2 (Riboflavin)</span><span class="macro-badge" id="vitB2Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB2Val">0 mg / 1.3 mg</div><div class="progress-track"><div class="progress-fill" id="vitB2Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B3 (Niacin)</span><span class="macro-badge" id="vitB3Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB3Val">0 mg / 16 mg</div><div class="progress-track"><div class="progress-fill" id="vitB3Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B5 (Pantothenic)</span><span class="macro-badge" id="vitB5Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB5Val">0 mg / 5 mg</div><div class="progress-track"><div class="progress-fill" id="vitB5Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B6</span><span class="macro-badge" id="vitB6Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB6Val">0 mg / 1.3 mg</div><div class="progress-track"><div class="progress-fill" id="vitB6Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B7 (Biotin)</span><span class="macro-badge" id="vitB7Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB7Val">0 mcg / 30 mcg</div><div class="progress-track"><div class="progress-fill" id="vitB7Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B9 (Folate)</span><span class="macro-badge" id="vitB9Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB9Val">0 mcg / 400 mcg</div><div class="progress-track"><div class="progress-fill" id="vitB9Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin B12</span><span class="macro-badge" id="vitB12Badge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitB12Val">0 mcg / 2.4 mcg</div><div class="progress-track"><div class="progress-fill" id="vitB12Bar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin C</span><span class="macro-badge" id="vitCBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitCVal">0 mg / 90 mg</div><div class="progress-track"><div class="progress-fill" id="vitCBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin D</span><span class="macro-badge" id="vitDBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitDVal">0 mcg / 15 mcg</div><div class="progress-track"><div class="progress-fill" id="vitDBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin E</span><span class="macro-badge" id="vitEBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitEVal">0 mg / 15 mg</div><div class="progress-track"><div class="progress-fill" id="vitEBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Vitamin K</span><span class="macro-badge" id="vitKBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="vitKVal">0 mcg / 120 mcg</div><div class="progress-track"><div class="progress-fill" id="vitKBar"></div></div></div>
+            </div>
+        </div>
+
+        <!-- CAPSULE 5: MACRO MINERALS -->
+        <div class="wide-capsule observer-capsule">
+            <div class="capsule-header-row">
+                <h2 class="capsule-title">
+                   <span class="icon-box">
+                        <img src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/macro-minerals.png?raw=true" class="capsule-icon" alt="Macro-minerals">
+                   </span>
+                   Macro minerals
+                </h2>
+            </div>
+            <div class="macros-grid" id="macroMineralsGrid">
+                <div class="macro-card"><div class="macro-top-label"><span>Calcium</span><span class="macro-badge" id="calciumBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="calciumVal">0 mg / 1000 mg</div><div class="progress-track"><div class="progress-fill" id="calciumBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Phosphorus</span><span class="macro-badge" id="pBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="pVal">0 mg / 700 mg</div><div class="progress-track"><div class="progress-fill" id="pBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Magnesium</span><span class="macro-badge" id="mgBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="mgVal">0 mg / 420 mg</div><div class="progress-track"><div class="progress-fill" id="mgBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Sodium</span><span class="macro-badge" id="naBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="naVal">0 mg / < 2000 mg</div><div class="progress-track"><div class="progress-fill" id="naBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Potassium</span><span class="macro-badge" id="potassiumBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="potassiumVal">0 mg / 3500 mg</div><div class="progress-track"><div class="progress-fill" id="potassiumBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Chloride</span><span class="macro-badge" id="clBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="clVal">0 mg / 2300 mg</div><div class="progress-track"><div class="progress-fill" id="clBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Sulphur</span><span class="macro-badge" id="sBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="sVal">0 mg / 1000 mg</div><div class="progress-track"><div class="progress-fill" id="sBar"></div></div></div>
+            </div>
+        </div>
+
+        <!-- CAPSULE 6: TRACE MINERALS -->
+        <div class="wide-capsule observer-capsule">
+            <div class="capsule-header-row">
+                <h2 class="capsule-title">
+                    <span class="icon-box">
+                        <img src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/trase-minerals.png?raw=true" class="capsule-icon" alt="Trase-minerals">
+                    </span>
+                    Trace minerals
+                </h2>
+            </div>
+            <div class="macros-grid" id="traceMineralsGrid">
+                <div class="macro-card"><div class="macro-top-label"><span>Iron</span><span class="macro-badge" id="ironBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="ironVal">0 mg / 8 mg</div><div class="progress-track"><div class="progress-fill" id="ironBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Zinc</span><span class="macro-badge" id="zincBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="zincVal">0 mg / 11 mg</div><div class="progress-track"><div class="progress-fill" id="zincBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Iodine</span><span class="macro-badge" id="iodineBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="iodineVal">0 mcg / 150 mcg</div><div class="progress-track"><div class="progress-fill" id="iodineBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Manganese</span><span class="macro-badge" id="mnBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="mnVal">0 mg / 2.3 mg</div><div class="progress-track"><div class="progress-fill" id="mnBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Selenium</span><span class="macro-badge" id="seBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="seVal">0 mcg / 55 mcg</div><div class="progress-track"><div class="progress-fill" id="seBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Copper</span><span class="macro-badge" id="cuBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="cuVal">0 mcg / 900 mcg</div><div class="progress-track"><div class="progress-fill" id="cuBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Fluoride</span><span class="macro-badge" id="fBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="fVal">0 mcg / 4000 mcg</div><div class="progress-track"><div class="progress-fill" id="fBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Chromium</span><span class="macro-badge" id="crBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="crVal">0 mcg / 35 mcg</div><div class="progress-track"><div class="progress-fill" id="crBar"></div></div></div>
+                <div class="macro-card"><div class="macro-top-label"><span>Molybdenum</span><span class="macro-badge" id="moBadge"><span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning"></span></div><div class="macro-val" id="moVal">0 mcg / 45 mcg</div><div class="progress-track"><div class="progress-fill" id="moBar"></div></div></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // IN-MEMORY SESSION STORE (STARTS 100% EMPTY ON EVERY FRESH LANDING)
+        const sessionChecklistStore = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+
+        // Wipe any legacy browser cache keys to prevent old test ticks from loading
+        for (let i = 0; i < 7; i++) {
+            sessionStorage.removeItem(`meal_v3_day_${i}`);
+            localStorage.removeItem(`meal_v3_day_${i}`);
+        }
+
+        // MASTER 24 FOOD DATABASE
+        const foodMasterDB = {
+            'Chickpeas': { cal: 378, pro: 20.5, fiber: 12.2, carb: 63.0, fat: 6.07, sug: 10.7, lac: 0, sfa: 0.60, unsat: 5.47, mufa: 1.36, pufa: 4.11, ala: 0.11, epa: 0, dha: 0, o6: 4.00, bCar: 40, aCar: 0, vitA: 3, vitB1: 0.48, vitB2: 0.21, vitB3: 1.54, vitB5: 1.60, vitB6: 0.54, vitB7: 10, vitB9: 557, vitB12: 0, vitC: 4.0, vitD: 0, vitE: 0.82, vitK: 9.0, ca: 105, p: 366, mg: 115, na: 24, k: 875, cl: 10, s: 180, fe: 6.2, zn: 3.4, iodine: 0, mn: 2.2, se: 8.2, cu: 850, f: 120, cr: 6, mo: 45 },
+            'Paneer': { cal: 133, pro: 9.1, fiber: 0, carb: 1.6, fat: 11.50, sug: 1.6, lac: 1.2, sfa: 7.20, unsat: 4.30, mufa: 3.90, pufa: 0.40, ala: 0.05, epa: 0, dha: 0, o6: 0.35, bCar: 15, aCar: 0, vitA: 85, vitB1: 0.02, vitB2: 0.18, vitB3: 0.10, vitB5: 0.30, vitB6: 0.04, vitB7: 2, vitB9: 12, vitB12: 0.45, vitC: 0, vitD: 0.20, vitE: 0.15, vitK: 1.0, ca: 240, p: 140, mg: 18, na: 12, k: 65, cl: 30, s: 80, fe: 0.2, zn: 1.2, iodine: 8, mn: 0.02, se: 7.5, cu: 40, f: 10, cr: 1, mo: 5 },
+            'Chia seeds': { cal: 48, pro: 1.7, fiber: 3.4, carb: 4.2, fat: 3.10, sug: 0, lac: 0, sfa: 0.33, unsat: 2.77, mufa: 0.28, pufa: 2.49, ala: 1.78, epa: 0, dha: 0, o6: 0.58, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.06, vitB2: 0.02, vitB3: 0.88, vitB5: 0.10, vitB6: 0.01, vitB7: 1, vitB9: 5, vitB12: 0, vitC: 0, vitD: 0, vitE: 0.05, vitK: 0, ca: 63, p: 86, mg: 33, na: 2, k: 40, cl: 1, s: 15, fe: 0.77, zn: 0.46, iodine: 0, mn: 0.27, se: 5.5, cu: 90, f: 20, cr: 2, mo: 8 },
+            'Sesame seeds': { cal: 57, pro: 1.8, fiber: 1.2, carb: 2.3, fat: 4.90, sug: 0.03, lac: 0, sfa: 0.70, unsat: 4.20, mufa: 1.87, pufa: 2.33, ala: 0.04, epa: 0, dha: 0, o6: 2.14, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.08, vitB2: 0.02, vitB3: 0.45, vitB5: 0.01, vitB6: 0.08, vitB7: 1, vitB9: 10, vitB12: 0, vitC: 0, vitD: 0, vitE: 0.02, vitK: 0, ca: 98, p: 63, mg: 35, na: 1, k: 47, cl: 1, s: 20, fe: 1.46, zn: 0.78, iodine: 0, mn: 0.25, se: 3.4, cu: 410, f: 25, cr: 3, mo: 6 },
+            'Rajma': { cal: 333, pro: 23.6, fiber: 15.2, carb: 60.0, fat: 1.13, sug: 2.1, lac: 0, sfa: 0.22, unsat: 0.91, mufa: 0.10, pufa: 0.81, ala: 0.58, epa: 0, dha: 0, o6: 0.23, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.61, vitB2: 0.22, vitB3: 2.10, vitB5: 0.80, vitB6: 0.40, vitB7: 8, vitB9: 394, vitB12: 0, vitC: 4.5, vitD: 0, vitE: 0.22, vitK: 5.6, ca: 143, p: 407, mg: 140, na: 12, k: 1406, cl: 8, s: 160, fe: 8.2, zn: 2.8, iodine: 0, mn: 1.4, se: 3.2, cu: 700, f: 110, cr: 5, mo: 35 },
+            'Black Chickpeas': { cal: 360, pro: 20.1, fiber: 16.8, carb: 58.0, fat: 6.07, sug: 6.0, lac: 0, sfa: 0.60, unsat: 5.47, mufa: 1.36, pufa: 4.11, ala: 0.11, epa: 0, dha: 0, o6: 4.00, bCar: 30, aCar: 0, vitA: 2, vitB1: 0.45, vitB2: 0.20, vitB3: 1.60, vitB5: 1.50, vitB6: 0.50, vitB7: 9, vitB9: 450, vitB12: 0, vitC: 3.0, vitD: 0, vitE: 0.80, vitK: 8.0, ca: 120, p: 340, mg: 130, na: 20, k: 800, cl: 10, s: 170, fe: 6.0, zn: 3.2, iodine: 0, mn: 2.1, se: 8.0, cu: 800, f: 130, cr: 6, mo: 40 },
+            'White peas': { cal: 341, pro: 21.8, fiber: 15.5, carb: 61.0, fat: 0.80, sug: 8.0, lac: 0, sfa: 0.18, unsat: 0.62, mufa: 0.10, pufa: 0.52, ala: 0.20, epa: 0, dha: 0, o6: 0.32, bCar: 20, aCar: 0, vitA: 1, vitB1: 0.70, vitB2: 0.20, vitB3: 2.90, vitB5: 1.20, vitB6: 0.20, vitB7: 6, vitB9: 274, vitB12: 0, vitC: 1.8, vitD: 0, vitE: 0.10, vitK: 14.0, ca: 55, p: 320, mg: 115, na: 15, k: 980, cl: 5, s: 150, fe: 4.4, zn: 3.0, iodine: 0, mn: 1.3, se: 1.5, cu: 500, f: 90, cr: 4, mo: 30 },
+            'Toor Dal': { cal: 343, pro: 22.3, fiber: 15.0, carb: 62.0, fat: 1.49, sug: 3.0, lac: 0, sfa: 0.30, unsat: 1.19, mufa: 0.27, pufa: 0.92, ala: 0.10, epa: 0, dha: 0, o6: 0.82, bCar: 10, aCar: 0, vitA: 1, vitB1: 0.45, vitB2: 0.19, vitB3: 2.90, vitB5: 1.30, vitB6: 0.35, vitB7: 7, vitB9: 250, vitB12: 0, vitC: 0, vitD: 0, vitE: 0.20, vitK: 0, ca: 73, p: 304, mg: 102, na: 17, k: 1100, cl: 6, s: 140, fe: 2.7, zn: 2.3, iodine: 0, mn: 1.1, se: 8.2, cu: 700, f: 100, cr: 5, mo: 32 },
+            'Chana Dal': { cal: 372, pro: 20.8, fiber: 10.2, carb: 59.0, fat: 5.60, sug: 5.0, lac: 0, sfa: 0.60, unsat: 5.00, mufa: 1.20, pufa: 3.80, ala: 0.10, epa: 0, dha: 0, o6: 3.70, bCar: 35, aCar: 0, vitA: 3, vitB1: 0.48, vitB2: 0.20, vitB3: 1.50, vitB5: 1.40, vitB6: 0.50, vitB7: 8, vitB9: 350, vitB12: 0, vitC: 2.0, vitD: 0, vitE: 0.70, vitK: 7.0, ca: 75, p: 330, mg: 110, na: 20, k: 820, cl: 8, s: 160, fe: 5.3, zn: 3.1, iodine: 0, mn: 2.0, se: 7.8, cu: 800, f: 115, cr: 5, mo: 38 },
+            'Green gram': { cal: 347, pro: 23.8, fiber: 16.3, carb: 63.0, fat: 1.24, sug: 6.6, lac: 0, sfa: 0.35, unsat: 0.89, mufa: 0.16, pufa: 0.73, ala: 0.24, epa: 0, dha: 0, o6: 0.49, bCar: 60, aCar: 0, vitA: 5, vitB1: 0.62, vitB2: 0.23, vitB3: 2.25, vitB5: 1.90, vitB6: 0.38, vitB7: 10, vitB9: 625, vitB12: 0, vitC: 4.8, vitD: 0, vitE: 0.51, vitK: 9.0, ca: 132, p: 367, mg: 189, na: 15, k: 1246, cl: 6, s: 170, fe: 6.7, zn: 2.7, iodine: 0, mn: 1.0, se: 8.2, cu: 900, f: 125, cr: 6, mo: 35 },
+            'Curd': { cal: 120, pro: 7.0, fiber: 0, carb: 9.4, fat: 6.20, sug: 9.4, lac: 7.0, sfa: 4.20, unsat: 2.00, mufa: 1.60, pufa: 0.40, ala: 0.04, epa: 0, dha: 0, o6: 0.20, bCar: 10, aCar: 0, vitA: 50, vitB1: 0.08, vitB2: 0.32, vitB3: 0.20, vitB5: 0.80, vitB6: 0.08, vitB7: 4, vitB9: 24, vitB12: 0.75, vitC: 1.0, vitD: 0.20, vitE: 0.10, vitK: 0.5, ca: 240, p: 190, mg: 24, na: 80, k: 310, cl: 180, s: 60, fe: 0.2, zn: 1.0, iodine: 12, mn: 0.02, se: 6.0, cu: 30, f: 20, cr: 1, mo: 6 },
+            'Carrot': { cal: 41, pro: 0.9, fiber: 2.8, carb: 9.6, fat: 0.24, sug: 4.7, lac: 0, sfa: 0.04, unsat: 0.20, mufa: 0.01, pufa: 0.19, ala: 0.002, epa: 0, dha: 0, o6: 0.11, bCar: 8285, aCar: 3477, vitA: 835, vitB1: 0.07, vitB2: 0.06, vitB3: 0.98, vitB5: 0.27, vitB6: 0.14, vitB7: 1, vitB9: 19, vitB12: 0, vitC: 5.9, vitD: 0, vitE: 0.66, vitK: 13.2, ca: 33, p: 35, mg: 12, na: 69, k: 320, cl: 40, s: 15, fe: 0.3, zn: 0.24, iodine: 0, mn: 0.14, se: 0.1, cu: 50, f: 40, cr: 2, mo: 2 },
+            'Soya chunks': { cal: 172, pro: 26.0, fiber: 6.5, carb: 16.5, fat: 0.50, sug: 3.0, lac: 0, sfa: 0.25, unsat: 0.25, mufa: 0.07, pufa: 0.18, ala: 0.02, epa: 0, dha: 0, o6: 0.16, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.20, vitB2: 0.10, vitB3: 1.20, vitB5: 0.40, vitB6: 0.20, vitB7: 5, vitB9: 100, vitB12: 0, vitC: 0, vitD: 0, vitE: 0.10, vitK: 0, ca: 120, p: 300, mg: 140, na: 10, k: 850, cl: 5, s: 120, fe: 10.0, zn: 2.4, iodine: 0, mn: 1.2, se: 12.0, cu: 600, f: 150, cr: 8, mo: 30 },
+            'Soya beans': { cal: 446, pro: 36.5, fiber: 9.3, carb: 30.0, fat: 19.48, sug: 7.3, lac: 0, sfa: 2.88, unsat: 16.60, mufa: 4.40, pufa: 12.20, ala: 1.33, epa: 0, dha: 0, o6: 10.87, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.87, vitB2: 0.87, vitB3: 1.60, vitB5: 0.80, vitB6: 0.38, vitB7: 18, vitB9: 375, vitB12: 0, vitC: 6.0, vitD: 0, vitE: 0.85, vitK: 47.0, ca: 277, p: 704, mg: 280, na: 2, k: 1797, cl: 6, s: 220, fe: 15.7, zn: 4.9, iodine: 0, mn: 2.5, se: 17.8, cu: 1700, f: 200, cr: 10, mo: 50 },
+            'Peanuts': { cal: 454, pro: 20.6, fiber: 6.8, carb: 12.9, fat: 39.64, sug: 3.8, lac: 0, sfa: 5.49, unsat: 34.15, mufa: 19.75, pufa: 14.40, ala: 0.03, epa: 0, dha: 0, o6: 14.37, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.51, vitB2: 0.11, vitB3: 9.70, vitB5: 1.40, vitB6: 0.28, vitB7: 14, vitB9: 192, vitB12: 0, vitC: 0, vitD: 0, vitE: 5.50, vitK: 0, ca: 74, p: 301, mg: 134, na: 14, k: 564, cl: 8, s: 160, fe: 3.6, zn: 2.6, iodine: 0, mn: 1.5, se: 5.8, cu: 900, f: 80, cr: 5, mo: 25 },
+            'Red Lobia': { cal: 336, pro: 23.5, fiber: 10.6, carb: 60.0, fat: 1.13, sug: 7.0, lac: 0, sfa: 0.22, unsat: 0.91, mufa: 0.10, pufa: 0.81, ala: 0.25, epa: 0, dha: 0, o6: 0.56, bCar: 30, aCar: 0, vitA: 3, vitB1: 0.85, vitB2: 0.23, vitB3: 2.10, vitB5: 1.50, vitB6: 0.36, vitB7: 9, vitB9: 633, vitB12: 0, vitC: 1.5, vitD: 0, vitE: 0.40, vitK: 5.0, ca: 110, p: 424, mg: 184, na: 16, k: 1112, cl: 7, s: 150, fe: 8.3, zn: 3.4, iodine: 0, mn: 1.5, se: 7.2, cu: 850, f: 110, cr: 5, mo: 35 },
+            'Flax seeds': { cal: 53, pro: 1.8, fiber: 2.7, carb: 2.9, fat: 4.06, sug: 0.1, lac: 0, sfa: 0.37, unsat: 3.69, mufa: 0.75, pufa: 2.94, ala: 2.29, epa: 0, dha: 0, o6: 0.65, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.16, vitB2: 0.02, vitB3: 0.31, vitB5: 0.10, vitB6: 0.05, vitB7: 1, vitB9: 9, vitB12: 0, vitC: 0.1, vitD: 0, vitE: 0.03, vitK: 0.4, ca: 26, p: 64, mg: 39, na: 3, k: 81, cl: 1, s: 15, fe: 0.57, zn: 0.43, iodine: 0, mn: 0.25, se: 2.5, cu: 120, f: 15, cr: 2, mo: 5 },
+            'White rice': { cal: 130, pro: 2.7, fiber: 0.4, carb: 28.0, fat: 0.26, sug: 0.1, lac: 0, sfa: 0.08, unsat: 0.18, mufa: 0.09, pufa: 0.09, ala: 0.01, epa: 0, dha: 0, o6: 0.08, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.16, vitB2: 0.02, vitB3: 1.50, vitB5: 0.40, vitB6: 0.10, vitB7: 1, vitB9: 58, vitB12: 0.20, vitC: 0, vitD: 0, vitE: 0.04, vitK: 0, ca: 10, p: 43, mg: 12, na: 1, k: 35, cl: 2, s: 10, fe: 1.2, zn: 0.5, iodine: 0, mn: 0.5, se: 7.5, cu: 70, f: 80, cr: 4, mo: 8 },
+            'Guava': { cal: 68, pro: 2.6, fiber: 5.4, carb: 14.3, fat: 0.83, sug: 8.9, lac: 0, sfa: 0.27, unsat: 0.56, mufa: 0.09, pufa: 0.47, ala: 0.11, epa: 0, dha: 0, o6: 0.36, bCar: 374, aCar: 0, vitA: 31, vitB1: 0.07, vitB2: 0.04, vitB3: 1.08, vitB5: 0.45, vitB6: 0.11, vitB7: 2, vitB9: 49, vitB12: 0, vitC: 228, vitD: 0, vitE: 0.73, vitK: 2.6, ca: 18, p: 40, mg: 22, na: 2, k: 417, cl: 4, s: 12, fe: 0.26, zn: 0.23, iodine: 0, mn: 0.15, se: 0.6, cu: 230, f: 30, cr: 1, mo: 2 },
+            'Horse gram': { cal: 321, pro: 22.0, fiber: 8.0, carb: 57.0, fat: 0.43, sug: 2.0, lac: 0, sfa: 0.11, unsat: 0.32, mufa: 0.10, pufa: 0.22, ala: 0.05, epa: 0, dha: 0, o6: 0.17, bCar: 25, aCar: 0, vitA: 2, vitB1: 0.42, vitB2: 0.20, vitB3: 1.50, vitB5: 1.10, vitB6: 0.20, vitB7: 6, vitB9: 140, vitB12: 0, vitC: 1.0, vitD: 0, vitE: 0.80, vitK: 0, ca: 287, p: 311, mg: 175, na: 12, k: 1210, cl: 5, s: 160, fe: 6.8, zn: 2.3, iodine: 0, mn: 1.8, se: 5.0, cu: 700, f: 100, cr: 5, mo: 25 },
+            'Chapathi': { cal: 242, pro: 8.17, fiber: 7.34, carb: 50.5, fat: 1.55, sug: 0.53, lac: 0, sfa: 0.34, unsat: 1.21, mufa: 0.30, pufa: 0.91, ala: 0.05, epa: 0, dha: 0, o6: 0.86, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.28, vitB2: 0.09, vitB3: 2.95, vitB5: 0.59, vitB6: 0.25, vitB7: 5, vitB9: 35, vitB12: 0, vitC: 0, vitD: 0, vitE: 0.47, vitK: 1.9, ca: 103, p: 255, mg: 114, na: 3, k: 291, cl: 4, s: 82, fe: 2.73, zn: 1.76, iodine: 0, mn: 2.16, se: 21.5, cu: 430, f: 150, cr: 8, mo: 30 },
+            'Defatted sesame flour': { cal: 408, pro: 34.5, fiber: 16.8, carb: 28.4, fat: 13.10, sug: 1.1, lac: 0, sfa: 2.20, unsat: 10.90, mufa: 4.20, pufa: 6.70, ala: 0.33, epa: 0, dha: 0, o6: 6.40, bCar: 0, aCar: 0, vitA: 0, vitB1: 0.79, vitB2: 0.24, vitB3: 5.20, vitB5: 0.31, vitB6: 0.74, vitB7: 10, vitB9: 118, vitB12: 0, vitC: 0, vitD: 0, vitE: 1.80, vitK: 2.0, ca: 1420, p: 965, mg: 510, na: 26, k: 810, cl: 0, s: 345, fe: 18.2, zn: 7.8, iodine: 0, mn: 2.7, se: 24.0, cu: 2000, f: 180, cr: 9, mo: 44 },
+            'Sesame oil': { cal: 163, pro: 0, fiber: 0, carb: 0, fat: 18.20, sug: 0, lac: 0, sfa: 2.70, unsat: 10.90, mufa: 4.20, pufa: 6.70, ala: 0.06, epa: 0, dha: 0, o6: 7.95, bCar: 0, aCar: 0, vitA: 0, vitB1: 0, vitB2: 0, vitB3: 0, vitB5: 0, vitB6: 0, vitB7: 0, vitB9: 0, vitB12: 0, vitC: 0, vitD: 0, vitE: 0.26, vitK: 2.5, ca: 0, p: 0, mg: 0, na: 0, k: 0, cl: 0, s: 0, fe: 0, zn: 0, iodine: 0, mn: 0, se: 0, cu: 0, f: 0, cr: 0, mo: 0 },
+            'Iodized salt': { cal: 0, pro: 0, fiber: 0, carb: 0, fat: 0, sug: 0, lac: 0, sfa: 0, unsat: 0, mufa: 0, pufa: 0, ala: 0, epa: 0, dha: 0, o6: 0, bCar: 0, aCar: 0, vitA: 0, vitB1: 0, vitB2: 0, vitB3: 0, vitB5: 0, vitB6: 0, vitB7: 0, vitB9: 0, vitB12: 0, vitC: 0, vitD: 0, vitE: 0, vitK: 0, ca: 0, p: 0, mg: 0, na: 1963, k: 0, cl: 3038, s: 0, fe: 0, zn: 0, iodine: 150, mn: 0, se: 0, cu: 0, f: 19, cr: 0, mo: 0 }
+        };
+
+        const weeklyMenu = {
+            0: [
+                { name: 'Chickpeas', key: 'Chickpeas', qty: '100 gms raw' },
+                { name: 'Curd', key: 'Curd', qty: '200 ml' },
+                { name: 'Chia seeds', key: 'Chia seeds', qty: '10 gms' },
+                { name: 'Sesame seeds', key: 'Sesame seeds', qty: '10 gms dry roasted' },
+                { name: 'Flax seeds', key: 'Flax seeds', qty: '10 gms dry roasted powdered form' },
+                { name: 'Carrot', key: 'Carrot', qty: '100 gms' },
+                { name: 'Defatted sesame flour', key: 'Defatted sesame flour', qty: '100 gms raw' },
+                { name: 'White rice', key: 'White rice', qty: '100 gms cooked' },
+                { name: 'Paneer', key: 'Paneer', qty: '50 gms' },
+                { name: 'Guava', key: 'Guava', qty: '100 gms' },
+                { name: 'Chapathi', key: 'Chapathi', qty: '100 gms whole wheat no oil' },
+                { name: 'Soya chunks', key: 'Soya chunks', qty: '60 gms raw' },
+                { name: 'Sesame oil', key: 'Sesame oil', qty: '20 ml used in a day' },
+                { name: 'Iodized salt', key: 'Iodized salt', qty: '5 gms used in cooking' }
+            ],
+            1: [
+                { name: 'Peanuts', key: 'Peanuts', qty: '80 gms raw' },
+                { name: 'Curd', key: 'Curd', qty: '200 ml' },
+                { name: 'Chia seeds', key: 'Chia seeds', qty: '10 gms' },
+                { name: 'Sesame seeds', key: 'Sesame seeds', qty: '10 gms dry roasted' },
+                { name: 'Flax seeds', key: 'Flax seeds', qty: '10 gms dry roasted powdered form' },
+                { name: 'Carrot', key: 'Carrot', qty: '100 gms' },
+                { name: 'Soya beans', key: 'Soya beans', qty: '100 gms raw' },
+                { name: 'White rice', key: 'White rice', qty: '100 gms cooked' },
+                { name: 'Paneer', key: 'Paneer', qty: '50 gms' },
+                { name: 'Guava', key: 'Guava', qty: '100 gms' },
+                { name: 'Chapathi', key: 'Chapathi', qty: '100 gms whole wheat no oil' },
+                { name: 'Soya chunks', key: 'Soya chunks', qty: '60 gms raw' },
+                { name: 'Sesame oil', key: 'Sesame oil', qty: '20 ml used in a day' },
+                { name: 'Iodized salt', key: 'Iodized salt', qty: '5 gms used in cooking' }
+            ],
+            2: [
+                { name: 'Green gram', key: 'Green gram', qty: '100 gms raw' },
+                { name: 'Curd', key: 'Curd', qty: '200 ml' },
+                { name: 'Chia seeds', key: 'Chia seeds', qty: '10 gms' },
+                { name: 'Sesame seeds', key: 'Sesame seeds', qty: '10 gms dry roasted' },
+                { name: 'Flax seeds', key: 'Flax seeds', qty: '10 gms dry roasted powdered form' },
+                { name: 'Carrot', key: 'Carrot', qty: '100 gms' },
+                { name: 'Chana Dal', key: 'Chana Dal', qty: '100 gms raw' },
+                { name: 'White rice', key: 'White rice', qty: '100 gms cooked' },
+                { name: 'Paneer', key: 'Paneer', qty: '50 gms' },
+                { name: 'Guava', key: 'Guava', qty: '100 gms' },
+                { name: 'Chapathi', key: 'Chapathi', qty: '100 gms whole wheat no oil' },
+                { name: 'Soya chunks', key: 'Soya chunks', qty: '60 gms raw' },
+                { name: 'Sesame oil', key: 'Sesame oil', qty: '20 ml used in a day' },
+                { name: 'Iodized salt', key: 'Iodized salt', qty: '5 gms used in cooking' }
+            ],
+            3: [
+                { name: 'Black Chickpeas', key: 'Black Chickpeas', qty: '100 gms raw' },
+                { name: 'Curd', key: 'Curd', qty: '200 ml' },
+                { name: 'Chia seeds', key: 'Chia seeds', qty: '10 gms' },
+                { name: 'Sesame seeds', key: 'Sesame seeds', qty: '10 gms dry roasted' },
+                { name: 'Flax seeds', key: 'Flax seeds', qty: '10 gms dry roasted powdered form' },
+                { name: 'Carrot', key: 'Carrot', qty: '100 gms' },
+                { name: 'Toor Dal', key: 'Toor Dal', qty: '100 gms raw' },
+                { name: 'White rice', key: 'White rice', qty: '100 gms cooked' },
+                { name: 'Paneer', key: 'Paneer', qty: '50 gms' },
+                { name: 'Guava', key: 'Guava', qty: '100 gms' },
+                { name: 'Chapathi', key: 'Chapathi', qty: '100 gms whole wheat no oil' },
+                { name: 'Soya chunks', key: 'Soya chunks', qty: '60 gms raw' },
+                { name: 'Sesame oil', key: 'Sesame oil', qty: '20 ml used in a day' },
+                { name: 'Iodized salt', key: 'Iodized salt', qty: '5 gms used in cooking' }
+            ],
+            4: [
+                { name: 'Red Lobia', key: 'Red Lobia', qty: '100 gms raw' },
+                { name: 'Curd', key: 'Curd', qty: '200 ml' },
+                { name: 'Chia seeds', key: 'Chia seeds', qty: '10 gms' },
+                { name: 'Sesame seeds', key: 'Sesame seeds', qty: '10 gms dry roasted' },
+                { name: 'Flax seeds', key: 'Flax seeds', qty: '10 gms dry roasted powdered form' },
+                { name: 'Carrot', key: 'Carrot', qty: '100 gms' },
+                { name: 'Toor Dal', key: 'Toor Dal', qty: '100 gms raw' },
+                { name: 'White rice', key: 'White rice', qty: '100 gms cooked' },
+                { name: 'Paneer', key: 'Paneer', qty: '50 gms' },
+                { name: 'Guava', key: 'Guava', qty: '100 gms' },
+                { name: 'Chapathi', key: 'Chapathi', qty: '100 gms whole wheat no oil' },
+                { name: 'Soya chunks', key: 'Soya chunks', qty: '60 gms raw' },
+                { name: 'Sesame oil', key: 'Sesame oil', qty: '20 ml used in a day' },
+                { name: 'Iodized salt', key: 'Iodized salt', qty: '5 gms used in cooking' }
+            ],
+            5: [
+                { name: 'Rajma', key: 'Rajma', qty: '100 gms raw' },
+                { name: 'Curd', key: 'Curd', qty: '200 ml' },
+                { name: 'Chia seeds', key: 'Chia seeds', qty: '10 gms' },
+                { name: 'Sesame seeds', key: 'Sesame seeds', qty: '10 gms dry roasted' },
+                { name: 'Flax seeds', key: 'Flax seeds', qty: '10 gms dry roasted powdered form' },
+                { name: 'Carrot', key: 'Carrot', qty: '100 gms' },
+                { name: 'Chana Dal', key: 'Chana Dal', qty: '100 gms raw' },
+                { name: 'White rice', key: 'White rice', qty: '100 gms cooked' },
+                { name: 'Paneer', key: 'Paneer', qty: '50 gms' },
+                { name: 'Guava', key: 'Guava', qty: '100 gms' },
+                { name: 'Chapathi', key: 'Chapathi', qty: '100 gms whole wheat no oil' },
+                { name: 'Soya chunks', key: 'Soya chunks', qty: '60 gms raw' },
+                { name: 'Sesame oil', key: 'Sesame oil', qty: '20 ml used in a day' },
+                { name: 'Iodized salt', key: 'Iodized salt', qty: '5 gms used in cooking' }
+            ],
+            6: [
+                { name: 'Horse gram', key: 'Horse gram', qty: '100 gms raw' },
+                { name: 'Curd', key: 'Curd', qty: '200 ml' },
+                { name: 'Chia seeds', key: 'Chia seeds', qty: '10 gms' },
+                { name: 'Sesame seeds', key: 'Sesame seeds', qty: '10 gms dry roasted' },
+                { name: 'Flax seeds', key: 'Flax seeds', qty: '10 gms dry roasted powdered form' },
+                { name: 'Carrot', key: 'Carrot', qty: '100 gms' },
+                { name: 'White peas', key: 'White peas', qty: '100 gms raw' },
+                { name: 'White rice', key: 'White rice', qty: '100 gms cooked' },
+                { name: 'Paneer', key: 'Paneer', qty: '50 gms' },
+                { name: 'Guava', key: 'Guava', qty: '100 gms' },
+                { name: 'Chapathi', key: 'Chapathi', qty: '100 gms whole wheat no oil' },
+                { name: 'Soya chunks', key: 'Soya chunks', qty: '60 gms raw' },
+                { name: 'Sesame oil', key: 'Sesame oil', qty: '20 ml used in a day' },
+                { name: 'Iodized salt', key: 'Iodized salt', qty: '5 gms used in cooking' }
+            ]
+        };
+
+        const targets = {
+            cal: 2200, pro: 100, fiber: 40, carb: 300, fat: 78, sug: 25, lac: 25,
+            sfa: 20, unsat: 50, mufa: 30, pufa: 20, ala: 1.6, epa: 0.25, dha: 0.25, o6: 17,
+            bCar: 4800, aCar: 0,
+            vitA: 900, vitB1: 1.2, vitB2: 1.3, vitB3: 16, vitB5: 5, vitB6: 1.3, vitB7: 30, vitB9: 400, vitB12: 2.4, vitC: 90, vitD: 15, vitE: 15, vitK: 120,
+            ca: 1000, p: 700, mg: 420, na: 2000, k: 3500, cl: 2300, s: 1000,
+            fe: 8, zn: 11, iodine: 150, mn: 2.3, se: 55, cu: 900, f: 4000, cr: 35, mo: 45
+        };
+
+        const ceilingNutrients = ['sugars', 'lactose', 'fat', 'sfa', 'na', 'cl'];
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        
+        let currentSelectedDay = 0;
+        let isCascadeAnimating = false;
+        let isSwitchingDay = false;
+
+        const nutrientStateStore = {};
+        const animatedCapsules = new Set();
+
+        function saveChecklistState(dayIdx) {
+            const grid = document.getElementById(`foodGrid_${dayIdx}`);
+            if (!grid) return;
+            const checkboxes = grid.querySelectorAll('input[type="checkbox"]');
+            const checkedIndices = [];
+            checkboxes.forEach((cb, idx) => {
+                if (cb.checked) checkedIndices.push(idx);
+            });
+            sessionChecklistStore[dayIdx] = checkedIndices;
+        }
+
+        function loadChecklistState(dayIdx) {
+            return sessionChecklistStore[dayIdx] || [];
+        }
+
+        function handleCheckboxChange(dayIdx) {
+            saveChecklistState(dayIdx);
+            recalculateTotals();
+            resetAnimationState();
+        }
+
+        function updateDayLine(activePill, durationMs = 380) {
+            const line = document.getElementById('dayActiveLine');
+            const capsule = document.getElementById('daySwitcher');
+            if (!line || !activePill || !capsule) return;
+
+            const pillRect = activePill.getBoundingClientRect();
+            const capsuleRect = capsule.getBoundingClientRect();
+
+            const left = pillRect.left - capsuleRect.left + capsule.scrollLeft;
+            const width = pillRect.width;
+
+            line.style.transition = `left ${durationMs}ms var(--ease-premium), width ${durationMs}ms var(--ease-premium), background-color 0.8s var(--ease-smooth)`;
+            line.style.left = `${left}px`;
+            line.style.width = `${width}px`;
+        }
+
+        // PRE-RENDER ALL 7 DAY CARDS STACKED IN DOM
+        function initDaysTrack() {
+            const stage = document.getElementById('dayStage');
+            if (!stage) return;
+
+            stage.innerHTML = '';
+
+            for (let dayIdx = 0; dayIdx < 7; dayIdx++) {
+                const capsule = document.createElement('div');
+                capsule.className = 'wide-capsule day-card-slide';
+                capsule.dataset.dayIndex = dayIdx;
+
+                const headerRow = document.createElement('div');
+                headerRow.className = 'capsule-header-row';
+                headerRow.innerHTML = `
+                    <h2 class="capsule-title">
+                        Today <span style="color:var(--text-muted); font-size:15px;">(${dayNames[dayIdx]})</span>
+                    </h2>
+                    <span class="custom-check-box" id="masterSelectCheckBox_${dayIdx}" onclick="toggleSelectAll(${dayIdx})" style="cursor: pointer; display: inline-flex;" title="Select / Deselect all items">
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </span>
+                `;
+
+                const grid = document.createElement('div');
+                grid.className = 'food-checklist-grid';
+                grid.id = `foodGrid_${dayIdx}`;
+
+                const todayItems = weeklyMenu[dayIdx] || [];
+                const savedCheckedIndices = loadChecklistState(dayIdx);
+
+                todayItems.forEach((item, idx) => {
+                    const isChecked = savedCheckedIndices.includes(idx);
+                    const label = document.createElement('label');
+                    label.className = 'food-item-checkbox';
+                    label.innerHTML = `
+                        <input type="checkbox" data-idx="${idx}" ${isChecked ? 'checked' : ''} onchange="handleCheckboxChange(${dayIdx})">
+                        <div class="custom-check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                        <span class="food-name">${item.name}<span class="food-qty">– ${item.qty}</span></span>
+                    `;
+                    grid.appendChild(label);
+                });
+
+                capsule.appendChild(headerRow);
+                capsule.appendChild(grid);
+                stage.appendChild(capsule);
+            }
+        }
+
+        // DIRECTIONAL MOTION ENGINE
+        function selectDay(targetDayIdx, isInitial = false) {
+            if (isSwitchingDay && !isInitial) return;
+            if (targetDayIdx === currentSelectedDay && !isInitial) return;
+
+            const previousDayIdx = currentSelectedDay;
+            const isGoingRight = targetDayIdx > previousDayIdx;
+            currentSelectedDay = targetDayIdx;
+
+            let activePillEl = null;
+            document.querySelectorAll('.day-pill').forEach(pill => {
+                const isActive = parseInt(pill.dataset.day) === targetDayIdx;
+                pill.classList.toggle('active', isActive);
+                if (isActive) activePillEl = pill;
+            });
+
+            if (activePillEl) {
+                updateDayLine(activePillEl, isInitial ? 0 : 380);
+            }
+
+            const allCards = document.querySelectorAll('.day-card-slide');
+            const oldCard = document.querySelector(`.day-card-slide[data-day-index="${previousDayIdx}"]`);
+            const newCard = document.querySelector(`.day-card-slide[data-day-index="${targetDayIdx}"]`);
+
+            if (isInitial || !oldCard || !newCard) {
+                allCards.forEach(c => {
+                    c.classList.remove('is-active', 'slide-exit-left', 'slide-exit-right', 'slide-enter-left', 'slide-enter-right');
+                });
+                if (newCard) newCard.classList.add('is-active');
+                recalculateTotals();
+                resetAnimationState();
+                return;
+            }
+
+            isSwitchingDay = true;
+
+            const exitClass = isGoingRight ? 'slide-exit-right' : 'slide-exit-left';
+            const enterClass = isGoingRight ? 'slide-enter-left' : 'slide-enter-right';
+
+            oldCard.classList.remove('is-active');
+            oldCard.classList.add(exitClass);
+
+            setTimeout(() => {
+                allCards.forEach(c => {
+                    if (c !== oldCard && c !== newCard) {
+                        c.classList.remove('is-active', 'slide-exit-left', 'slide-exit-right', 'slide-enter-left', 'slide-enter-right');
+                    }
+                });
+
+                newCard.classList.add(enterClass);
+
+                setTimeout(() => {
+                    oldCard.classList.remove('slide-exit-left', 'slide-exit-right');
+                    newCard.classList.remove('slide-enter-left', 'slide-enter-right');
+                    newCard.classList.add('is-active');
+                    isSwitchingDay = false;
+                }, 350);
+
+            }, 100);
+
+            recalculateTotals();
+            resetAnimationState();
+        }
+
+        document.querySelectorAll('.day-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                const dayIdx = parseInt(this.dataset.day);
+                if (dayIdx !== currentSelectedDay) {
+                    selectDay(dayIdx);
+                }
+            });
+        });
+
+        const daySwitcherEl = document.getElementById('daySwitcher');
+        if (daySwitcherEl) {
+            daySwitcherEl.addEventListener('scroll', () => {
+                const activePill = document.querySelector('.day-pill.active');
+                if (activePill) updateDayLine(activePill, 0);
+            });
+        }
+
+        function toggleSelectAll(dayIdx) {
+            if (isCascadeAnimating) return;
+            const grid = document.getElementById(`foodGrid_${dayIdx}`);
+            if (!grid) return;
+
+            const checkboxes = Array.from(grid.querySelectorAll('input[type="checkbox"]'));
+            if (checkboxes.length === 0) return;
+
+            const allChecked = checkboxes.every(cb => cb.checked);
+            const targetState = !allChecked;
+            isCascadeAnimating = true;
+
+            const sequence = targetState 
+                ? checkboxes.map((_, i) => i) 
+                : checkboxes.map((_, i) => checkboxes.length - 1 - i);
+
+            const stepDelay = Math.max(35, Math.floor(650 / checkboxes.length));
+
+            sequence.forEach((itemIdx, seqStep) => {
+                setTimeout(() => {
+                    const cb = checkboxes[itemIdx];
+                    if (cb && cb.checked !== targetState) {
+                        cb.checked = targetState;
+                        saveChecklistState(dayIdx);
+                        recalculateTotals();
+                        resetAnimationState();
+                    }
+
+                    if (seqStep === sequence.length - 1) {
+                        isCascadeAnimating = false;
+                    }
+                }, seqStep * stepDelay);
+            });
+        }
+
+        function updateMasterCheckBoxState(dayIdx) {
+            const grid = document.getElementById(`foodGrid_${dayIdx}`);
+            const masterBox = document.getElementById(`masterSelectCheckBox_${dayIdx}`);
+            if (!grid || !masterBox) return;
+
+            const checkboxes = grid.querySelectorAll('input[type="checkbox"]');
+            const allChecked = checkboxes.length > 0 && Array.from(checkboxes).every(cb => cb.checked);
+            if (allChecked) {
+                masterBox.classList.add('checked');
+            } else {
+                masterBox.classList.remove('checked');
+            }
+        }
+
+        function getDynamicBarColor(id, pct) {
+            const isCeiling = ceilingNutrients.includes(id);
+
+            if (isCeiling && pct > 100) {
+                return {
+                    barColor: 'rgba(234, 67, 53, 1)',
+                    badgeBg: 'rgba(234, 67, 53, 0.15)',
+                    badgeTextColor: '#ea4335',
+                    isWarning: true
+                };
+            }
+
+            let baseRgb = "52, 168, 83";
+
+            const fattyAcids = ['sfa', 'unsat', 'mufa', 'pufa', 'ala', 'epa', 'dha', 'o6'];
+            if (fattyAcids.includes(id)) {
+                baseRgb = "255, 213, 0";
+            } else if (id === 'bCarotene') {
+                baseRgb = "255, 122, 0";
+            }
+
+            let alpha = Math.min(Math.max(pct / 100, 0), 1);
+
+            return {
+                barColor: `rgba(${baseRgb}, ${alpha})`,
+                badgeBg: `rgba(${baseRgb}, 0.15)`,
+                badgeTextColor: `rgb(${baseRgb})`,
+                isWarning: false
+            };
+        }
+
+        function recalculateTotals() {
+            const todayItems = weeklyMenu[currentSelectedDay] || [];
+            const grid = document.getElementById(`foodGrid_${currentSelectedDay}`);
+
+            let totals = {};
+            Object.keys(targets).forEach(k => totals[k] = 0);
+
+            if (grid) {
+                const checkboxes = grid.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach((cb, idx) => {
+                    if (cb.checked) {
+                        const itemObj = todayItems[idx];
+                        const data = foodMasterDB[itemObj.key];
+                        if (data) {
+                            Object.keys(totals).forEach(k => {
+                                if (data[k] !== undefined) totals[k] += data[k];
+                            });
+                        }
+                    }
+                });
+            }
+
+            updateMasterCheckBoxState(currentSelectedDay);
+
+            updateBar('cal', totals.cal, targets.cal, 'kcal');
+            updateBar('protein', totals.pro, targets.pro, 'gms');
+            updateBar('fiber', totals.fiber, targets.fiber, 'gms');
+            updateBar('carbs', totals.carb, targets.carb, 'gms');
+            updateBar('fat', totals.fat, targets.fat, 'gms');
+            updateBar('sugars', totals.sug, targets.sug, 'gms', '< ');
+            updateBar('lactose', totals.lac, targets.lac, 'gms', '< ');
+
+            updateBar('sfa', totals.sfa, targets.sfa, 'gms');
+            updateBar('unsat', totals.unsat, targets.unsat, 'gms');
+            updateBar('mufa', totals.mufa, targets.mufa, 'gms');
+            updateBar('pufa', totals.pufa, targets.pufa, 'gms');
+            updateBar('ala', totals.ala, targets.ala, 'gms');
+            updateBar('epa', totals.epa, targets.epa, 'gms');
+            updateBar('dha', totals.dha, targets.dha, 'gms');
+            updateBar('o6', totals.o6, targets.o6, 'gms');
+
+            updateBar('bCarotene', totals.bCar, targets.bCar, 'mcg');
+            updateBar('aCarotene', totals.aCar, targets.aCar, 'mcg', '', true);
+
+            updateBar('vitA', totals.vitA, targets.vitA, 'mcg');
+            updateBar('vitB1', totals.vitB1, targets.vitB1, 'mg');
+            updateBar('vitB2', totals.vitB2, targets.vitB2, 'mg');
+            updateBar('vitB3', totals.vitB3, targets.vitB3, 'mg');
+            updateBar('vitB5', totals.vitB5, targets.vitB5, 'mg');
+            updateBar('vitB6', totals.vitB6, targets.vitB6, 'mg');
+            updateBar('vitB7', totals.vitB7, targets.vitB7, 'mcg');
+            updateBar('vitB9', totals.vitB9, targets.vitB9, 'mcg');
+            updateBar('vitB12', totals.vitB12, targets.vitB12, 'mcg');
+            updateBar('vitC', totals.vitC, targets.vitC, 'mg');
+            updateBar('vitD', totals.vitD, targets.vitD, 'mcg');
+            updateBar('vitE', totals.vitE, targets.vitE, 'mg');
+            updateBar('vitK', totals.vitK, targets.vitK, 'mcg');
+
+            updateBar('calcium', totals.ca, targets.ca, 'mg');
+            updateBar('p', totals.p, targets.p, 'mg');
+            updateBar('mg', totals.mg, targets.mg, 'mg');
+            updateBar('na', totals.na, targets.na, 'mg', '< ');
+            updateBar('potassium', totals.k, targets.k, 'mg');
+            updateBar('cl', totals.cl, targets.cl, 'mg');
+            updateBar('s', totals.s, targets.s, 'mg');
+
+            updateBar('iron', totals.fe, targets.fe, 'mg');
+            updateBar('zinc', totals.zn, targets.zn, 'mg');
+            updateBar('iodine', totals.iodine, targets.iodine, 'mcg');
+            updateBar('mn', totals.mn, targets.mn, 'mg');
+            updateBar('se', totals.se, targets.se, 'mcg');
+            updateBar('cu', totals.cu, targets.cu, 'mcg');
+            updateBar('f', totals.f, targets.f, 'mcg');
+            updateBar('cr', totals.cr, targets.cr, 'mcg');
+            updateBar('mo', totals.mo, targets.mo, 'mcg');
+        }
+
+        function updateBar(id, val, target, unit, prefix = '', isAlphaCarotene = false) {
+            const badgeEl = document.getElementById(`${id}Badge`);
+            const valEl = document.getElementById(`${id}Val`);
+            const barEl = document.getElementById(`${id}Bar`);
+
+            if (!valEl || !barEl || !badgeEl) return;
+
+            let pct = 0;
+            let rawPct = 0;
+            let formattedVal = 0;
+
+            if (isAlphaCarotene) {
+                formattedVal = val.toFixed(val % 1 ? (val < 1 ? 2 : 1) : 0);
+                valEl.innerText = `${formattedVal} ${unit} / N/A`;
+            } else {
+                rawPct = target > 0 ? Math.round((val / target) * 100) : 100;
+                pct = Math.min(rawPct, 100);
+                formattedVal = val.toFixed(val % 1 ? (val < 1 ? 2 : 1) : 0);
+                valEl.innerText = `${formattedVal} ${unit} / ${prefix}${target} ${unit}`;
+            }
+
+            const visualStyle = getDynamicBarColor(id, rawPct);
+
+            nutrientStateStore[id] = { val, target, pct, rawPct, visualStyle, isAlphaCarotene };
+
+            const capsuleParent = badgeEl.closest('.observer-capsule');
+
+            if (capsuleParent && animatedCapsules.has(capsuleParent)) {
+                applySingleBarAnimation(id);
+            }
+        }
+
+        function applySingleBarAnimation(id) {
+            const state = nutrientStateStore[id];
+            if (!state) return;
+
+            const badgeEl = document.getElementById(`${id}Badge`);
+            const barEl = document.getElementById(`${id}Bar`);
+
+            if (!badgeEl || !barEl) return;
+
+            let txtSpan = badgeEl.querySelector('.badge-txt-span');
+            let tickSvg = badgeEl.querySelector('.badge-tick-svg');
+            let warnImg = badgeEl.querySelector('.badge-warn-img');
+
+            if (!txtSpan || !tickSvg || !warnImg) {
+                badgeEl.innerHTML = `<span class="badge-txt-span">0%</span><svg class="badge-tick-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><img class="badge-warn-img" src="https://github.com/minsathya/minsathya.github.io/blob/main/nutrition/images/warning.png?raw=true" alt="Warning">`;
+                txtSpan = badgeEl.querySelector('.badge-txt-span');
+                tickSvg = badgeEl.querySelector('.badge-tick-svg');
+                warnImg = badgeEl.querySelector('.badge-warn-img');
+            }
+
+            if (state.isAlphaCarotene) {
+                if (state.val > 0) {
+                    barEl.style.transform = 'scaleX(1)';
+                    barEl.style.backgroundColor = 'rgba(52, 168, 83, 1)';
+                    badgeEl.classList.remove('warning-badge');
+                    badgeEl.classList.add('completed-badge');
+                    badgeEl.style.backgroundColor = 'rgba(52, 168, 83, 1)';
+                    badgeEl.style.color = '#ffffff';
+                } else {
+                    barEl.style.transform = 'scaleX(0)';
+                    barEl.style.backgroundColor = 'rgba(52, 168, 83, 0)';
+                    badgeEl.classList.remove('completed-badge', 'warning-badge');
+                    badgeEl.style.backgroundColor = 'rgba(52, 168, 83, 0.15)';
+                    badgeEl.style.color = '#34a853';
+                    txtSpan.innerText = '0%';
+                }
+            } else {
+                barEl.style.backgroundColor = state.visualStyle.barColor;
+
+                if (state.visualStyle.isWarning) {
+                    barEl.style.transform = 'scaleX(1)';
+                    badgeEl.classList.remove('completed-badge');
+                    badgeEl.classList.add('warning-badge');
+                    txtSpan.innerText = `${state.rawPct}%`;
+                } 
+                else if (state.pct >= 100) {
+                    barEl.style.transform = 'scaleX(1)';
+                    badgeEl.classList.remove('warning-badge');
+                    badgeEl.classList.add('completed-badge');
+                    badgeEl.style.backgroundColor = state.visualStyle.barColor;
+                    badgeEl.style.color = '#ffffff';
+                    txtSpan.innerText = '100%';
+                } 
+                else {
+                    barEl.style.transform = `scaleX(${state.pct / 100})`;
+                    badgeEl.classList.remove('completed-badge', 'warning-badge');
+                    badgeEl.style.backgroundColor = state.visualStyle.badgeBg;
+                    badgeEl.style.color = state.visualStyle.badgeTextColor;
+                    txtSpan.innerText = `${state.pct}%`;
+                }
+            }
+        }
+
+        function animateCapsuleCascade(capsule) {
+            if (animatedCapsules.has(capsule)) return;
+            animatedCapsules.add(capsule);
+
+            const badges = capsule.querySelectorAll('.macro-badge');
+            badges.forEach((badge, index) => {
+                const id = badge.id.replace('Badge', '');
+                setTimeout(() => {
+                    applySingleBarAnimation(id);
+                }, index * 50);
+            });
+        }
+
+        function resetAnimationState() {
+            animatedCapsules.clear();
+
+            document.querySelectorAll('.observer-capsule').forEach(capsule => {
+                const rect = capsule.getBoundingClientRect();
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+                const isVisible = visibleHeight > 0 && (visibleHeight / rect.height) >= 0.05;
+
+                if (isVisible) {
+                    animateCapsuleCascade(capsule);
+                } else {
+                    const badges = capsule.querySelectorAll('.macro-badge');
+                    badges.forEach(badge => {
+                        const id = badge.id.replace('Badge', '');
+                        const barEl = document.getElementById(`${id}Bar`);
+                        const badgeEl = document.getElementById(`${id}Badge`);
+                        if (barEl) {
+                            barEl.style.transition = 'none';
+                            barEl.style.transform = 'scaleX(0)';
+                        }
+                        if (badgeEl) {
+                            badgeEl.style.transition = 'none';
+                            badgeEl.classList.remove('completed-badge', 'warning-badge');
+                            badgeEl.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                            badgeEl.style.color = 'var(--text-muted)';
+                            const txtSpan = badgeEl.querySelector('.badge-txt-span');
+                            if (txtSpan) {
+                                txtSpan.innerText = '0%';
+                            }
+                        }
+                    });
+
+                    capsule.offsetHeight;
+
+                    badges.forEach(badge => {
+                        const id = badge.id.replace('Badge', '');
+                        const barEl = document.getElementById(`${id}Bar`);
+                        const badgeEl = document.getElementById(`${id}Badge`);
+                        if (barEl) barEl.style.transition = '';
+                        if (badgeEl) badgeEl.style.transition = '';
+                    });
+                }
+            });
+        }
+
+        // 5% INTERSECTION OBSERVER FOR IMMEDIATE SCROLL DETECTION
+        const observerOptions = {
+            root: null,
+            rootMargin: '100px 0px',
+            threshold: 0.05
+        };
+
+        const capsuleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCapsuleCascade(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.observer-capsule').forEach(capsule => {
+            capsuleObserver.observe(capsule);
+        });
+
+        // PALETTE ENGINE
+        const bodyElement = document.body;
+        const systemLightQuery = window.matchMedia('(prefers-color-scheme: light)');
+
+        function applyTargetPalette() {
+            const activeSessionOverride = sessionStorage.getItem('dashboard-theme');
+            if (activeSessionOverride) {
+                if (activeSessionOverride === 'light') {
+                    bodyElement.classList.add('light-mode');
+                } else {
+                    bodyElement.classList.remove('light-mode');
+                }
+            } else {
+                if (systemLightQuery.matches) {
+                    bodyElement.classList.add('light-mode');
+                } else {
+                    bodyElement.classList.remove('light-mode');
+                }
+            }
+        }
+
+        applyTargetPalette();
+
+        systemLightQuery.addEventListener('change', (e) => {
+            sessionStorage.removeItem('dashboard-theme');
+            if (e.matches) {
+                bodyElement.classList.add('light-mode');
+            } else {
+                bodyElement.classList.remove('light-mode');
+            }
+            recalculateTotals();
+            const activePill = document.querySelector('.day-pill.active');
+            if (activePill) updateDayLine(activePill, 0);
+        });
+
+        window.addEventListener('resize', () => {
+            const activePill = document.querySelector('.day-pill.active');
+            if (activePill) updateDayLine(activePill, 0);
+        });
+
+        window.addEventListener('pageshow', () => {
+            if (document.activeElement && document.activeElement.blur) {
+                document.activeElement.blur();
+            }
+        });
+
+        // INITIALIZE ALL 7 DAY CARDS AND START ON SUNDAY
+        initDaysTrack();
+        selectDay(0, true);
+    </script>
+</body>
+</html>
